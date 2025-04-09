@@ -1,6 +1,6 @@
 
 #last modified 28/02/2022 Monday, model comparision to write in supplementary materials
-####### analysis with cleaned-up data file Fitness_final_analysis.xlsx#####################################################
+####### analysis with cleaned-up data file Fitness_final_analysis.xlsx######
 packageVersion("loo")
 library(cmdstanr)
 set_cmdstan_path("C:/Users/lulu/R/R-Library/cmdstan-2.27.0/")
@@ -35,12 +35,12 @@ d <- d %>% mutate(
                   osz = (Initial_colony_size - mean(Initial_colony_size))/sd(Initial_colony_size),
                   )
 #m4.1.nos is the final model to compare with.
-#normal model, starting model
+# regular model, starting model
 
 ###### Model with additive overdispersion, bernoulli, binomial, possion ######################################################
 
 #==============================================
-#model 4, smooth term using for queen fecundity, modified based on model3
+#model 4, a smooth term used for queen fecundity, modified based on model3
 #==============================================
 bf_survQ <- bf(queen_survival ~ treatment*osz + 
                  (1|p|colony)) + bernoulli()
@@ -87,7 +87,7 @@ m4.smooth <- brm(bf_tot,
           file = "m4.smooth",
           data=d)
 
-waic(m4.1.nos, m4.smooth)# the model without smooth term is better
+waic(m4.1.nos, m4.smooth)# The model without smooth term is better
 
 
 #=======================
@@ -164,5 +164,5 @@ waic(three)#waic=354.3
 waic(four)#waic=352.6
 loo_compare(one, two, three, four, criterion="waic")
 
-#the model with poisson, without smooth nad additional source colony effect is teh best
+#the model with Poisson, without smooth and additional source colony effect is the best
 
